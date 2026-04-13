@@ -8,7 +8,8 @@
     "scheme": "knowly",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pabris.knowly"
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +18,15 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ],
+      "package": "com.pabris.knowly"
     },
     "web": {
       "output": "static",
@@ -47,10 +56,21 @@
           "barcodeScannerEnabled": true
         }
       ],
+      "expo-secure-store",
+      "expo-image",
+      "expo-web-browser",
+
+      "expo-file-system",
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "photosPermission": "La aplicacón necesita acceso a tus photos para subir los archivos y para que puedas hacer el análisis de tus apuntes",
           "colors": {
             "cropToolbarColor": "#000000"
           },
@@ -61,13 +81,24 @@
           }
         }
       ],
-      "expo-secure-store",
-      "expo-image",
-      "expo-web-browser"
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone.",
+          "enableBackgroundPlayback": true,
+          "enableBackgroundRecording": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e9cb44cf-8f2f-4a18-9f8a-3013ae730874"
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ export default function ProfileScreen() {
   const [isSignOut, setIsSignOut] = useState(false);
   const { signOut, session } = useAuth();
   const userId = session?.user?.id;
-  const { data, isLoading } = useProfile(userId);
+  const { data } = useProfile(userId);
 
   return (
     <Content>

@@ -14,7 +14,8 @@ export type ThemedTextProps = TextProps & {
     | "caption"
     | "overline"
     | "link"
-    | "muted";
+    | "muted"
+    | "mutedSemibold";
 };
 
 export function Text({ style, type = "body", ...rest }: ThemedTextProps) {
@@ -24,7 +25,7 @@ export function Text({ style, type = "body", ...rest }: ThemedTextProps) {
     <RNText
       style={[
         { color: colors.text },
-        type === "caption" || type === "overline" || type === "muted"
+        type === "muted" || type == "caption" || type === "mutedSemibold"
           ? { color: colors.textSecondary }
           : undefined,
         type === "link" ? { color: colors.primary } : undefined,
@@ -40,6 +41,7 @@ export function Text({ style, type = "body", ...rest }: ThemedTextProps) {
         type === "overline" ? styles.overline : undefined,
         type === "link" ? styles.link : undefined,
         type === "muted" ? styles.muted : undefined,
+        type === "mutedSemibold" ? styles.mutedSemibold : undefined,
         style,
       ]}
       {...rest}
@@ -109,5 +111,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontFamily: "Inter_400Regular",
+  },
+  mutedSemibold: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: "Inter_600SemiBold",
   },
 });

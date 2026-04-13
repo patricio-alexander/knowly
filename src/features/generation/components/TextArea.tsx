@@ -6,9 +6,10 @@ import { StyleSheet, TextInput, View } from "react-native";
 type TextAreaProps = {
   onChange?: (val: string) => void;
   value?: string;
+  placeholder?: string;
 };
 
-export const TextArea = ({ onChange, value }: TextAreaProps) => {
+export const TextArea = ({ onChange, value, placeholder }: TextAreaProps) => {
   const [focused, setFocused] = useState(false);
   const color = useThemeColor();
 
@@ -30,7 +31,7 @@ export const TextArea = ({ onChange, value }: TextAreaProps) => {
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         multiline
-        placeholder="Escribe o pega aquí tus apuntes de clase, fragmentos de libros o notas rápidas..."
+        placeholder={placeholder || "Escribe o pega aquí tus apuntes de clase, fragmentos de libros o notas rápidas..."}
         placeholderTextColor={color.icon}
         style={[
           styles.input,

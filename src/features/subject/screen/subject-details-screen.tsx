@@ -13,7 +13,6 @@ import { Modal } from "@/components/ui/Modal";
 import { ControlInput } from "@/components/ui/Input";
 import { useModules } from "../hooks/useModules";
 import { useAddModule } from "../hooks/useAddModule";
-import { useAuth } from "@/context/AuthContext";
 
 export default function SubjectDetailsScreen() {
   const { name, subjectId } = useLocalSearchParams<{

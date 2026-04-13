@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 import { Button } from "@/components/ui/Button";
 import { Content } from "@/components/ui/Content";
 import { ControlInput } from "@/components/ui/Input";
@@ -14,6 +14,7 @@ import { SubjectList } from "../components/SubjectList";
 import { router } from "expo-router";
 import { useSubjects } from "../hooks/useSubjects";
 import { useAddSubject } from "../hooks/useAddSubject";
+import { Skeleton } from "moti/skeleton";
 import ColorPicker, {
   ColorFormatsObject,
   colorKit,
@@ -22,6 +23,7 @@ import ColorPicker, {
   PreviewText,
 } from "reanimated-color-picker";
 import Animated, { useSharedValue } from "react-native-reanimated";
+import { SubjectCard } from "../components/SubjectCard";
 const customSwatches = new Array(6)
   .fill("#fff")
   .map(() => colorKit.randomRgbColor().hex());
@@ -29,11 +31,12 @@ const customSwatches = new Array(6)
 export default function SubjectScreen() {
   const color = useThemeColor();
   const theme = useColorScheme() ?? "light";
+  const colorMode = theme === "light" ? "light" : "dark";
 
   const [isOpen, setIsOpen] = useState(false);
   const [subjectName, setSubjectName] = useState("");
 
-  const { data } = useSubjects();
+  const { data, isLoading } = useSubjects();
   const { mutate } = useAddSubject();
 
   const openModal = () => {
@@ -133,20 +136,37 @@ export default function SubjectScreen() {
         Mis Materias
       </Text>
       <Search placeholder="Buscar materias..." />
-      <SubjectList
-        style={{ marginTop: 16 }}
-        subjects={data ?? []}
-        onSubjectPress={(subject) =>
-          router.push({
-            pathname: "/(subject)/details/[subjectId]",
-            params: {
-              subjectId: subject.id,
-              name: subject.name,
-              totalModules: subject.modulesCount,
-            },
-          })
-        }
-      />
+
+      {isLoading ? (
+        <View style={{ gap: 16, marginTop: 16 }}>
+          {Array.from({ length: 2 }).map((_, index) => (
+            <Skeleton
+              show={true}
+              colorMode={colorMode}
+              key={index}
+              colors={color.skeleton}
+            >
+              <SubjectCard name="none" color="white" />
+            </Skeleton>
+          ))}
+        </View>
+      ) : (
+        <SubjectList
+          style={{ marginTop: 16 }}
+          subjects={data ?? []}
+          onSubjectPress={(subject) =>
+            router.push({
+              pathname: "/(subject)/details/[subjectId]",
+              params: {
+                subjectId: subject.id,
+                name: subject.name,
+                totalModules: subject.modulesCount,
+              },
+            })
+          }
+        />
+      )}
+
       <Button
         onPress={openModal}
         style={{

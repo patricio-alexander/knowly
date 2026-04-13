@@ -27,6 +27,7 @@ import AuthProvider from "@/context/AuthContext";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export const unstable_settings = {
   anchor: "(tabs)",
 };
@@ -55,44 +56,46 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              headerBackground: () => (
-                <View
-                  style={{
-                    backgroundColor: color.background,
-                    flex: 1,
-                    borderBottomColor: color.border,
-                    borderBottomWidth: 1,
-                  }}
-                />
-              ),
-            }}
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
-            <Stack.Screen
-              name="(tabs)"
-              options={{
+            <Stack
+              screenOptions={{
                 headerShown: false,
+                headerBackground: () => (
+                  <View
+                    style={{
+                      backgroundColor: color.background,
+                      flex: 1,
+                      borderBottomColor: color.border,
+                      borderBottomWidth: 1,
+                    }}
+                  />
+                ),
               }}
-            />
-            <Stack.Screen
-              name="modal"
-              options={{ presentation: "modal", title: "Modal" }}
-            />
+            >
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="modal"
+                options={{ presentation: "modal", title: "Modal" }}
+              />
 
-            <Stack.Screen name="(generation)/audio-to-notes" />
-            <Stack.Screen name="(generation)/pdf-to-questions" />
-            <Stack.Screen name="(generation)/[type]/[id]" />
-          </Stack>
-          <StatusBar style="auto" />
-        </ThemeProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+              <Stack.Screen name="(generation)/audio-to-notes" />
+              <Stack.Screen name="(generation)/pdf-to-questions" />
+              <Stack.Screen name="(generation)/[type]/[id]" />
+            </Stack>
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

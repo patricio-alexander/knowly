@@ -1,11 +1,24 @@
 const tintColorLight = "#5048e5";
 const tintColorDark = "#6764f2";
 
+export const GradientColors = {
+  primary: [tintColorLight, "#818cf8"],
+  secondary: ["#64748b", "#94a3b8"],
+  success: ["#059669", "#34d399"],
+  warning: ["#d97706", "#fbbf24"],
+  danger: ["#dc2626", "#f87171"],
+  sunset: ["#f97316", "#fbbf24"],
+  ocean: ["#0ea5e9", "#06b6d4"],
+  forest: ["#10b981", "#34d399"],
+  royal: ["#7c3aed", "#a78bfa"],
+};
+
 export const Colors = {
   light: {
     text: "#11181C",
     textSecondary: "#64748b",
     background: "#f6f6f8",
+    backgroundSecondary: "#fdfdfd",
     surface: "#ffffff",
     surfacePrimary: "#5048e50d",
     surfaceSecondary: "#fff3",
@@ -21,13 +34,17 @@ export const Colors = {
     tabIconDefault: "#94a3b8",
     tabIconSelected: tintColorLight,
     primary: tintColorLight,
+    secondary: "#64748b",
     border: "#e5e7eb",
     borderPrimary: "#5048e54d",
+    white: "#ffffff",
+    skeleton: ["#e2e8f0", "#cbd5e1"],
   },
   dark: {
     text: "#f1f5f9",
     textSecondary: "#94a3b8",
     background: "#121121",
+    backgroundSecondary: "#19172b",
     surface: "#6764f20d",
     surfacePrimary: "#6764f21a",
     surfaceSecondary: "#ffffff1a",
@@ -43,7 +60,10 @@ export const Colors = {
     tabIconDefault: "#64748b",
     tabIconSelected: tintColorDark,
     primary: tintColorDark,
+    secondary: "#94a3b8",
     border: "#6764f233",
     borderPrimary: "#6764f24d",
+    white: "#ffffff",
+    skeleton: ["#334155", "#1e293b"],
   },
 };

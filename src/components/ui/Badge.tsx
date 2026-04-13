@@ -12,7 +12,6 @@ type BadgeProps = {
 
 export const Badge = ({ label, variant = "default", style }: BadgeProps) => {
   const color = useThemeColor();
-
   const variantStyles: Record<BadgeVariant, { bg: string; text: string }> = {
     default: { bg: color.surfaceTertiary, text: color.text },
     primary: { bg: color.surfacePrimary, text: color.primary },
